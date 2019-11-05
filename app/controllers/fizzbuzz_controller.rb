@@ -1,23 +1,24 @@
 class FizzbuzzController < ApplicationController
+  include Fizzbuzzable
 
   def computate
     puts "Params == #{params[:value]}"
-    # value = params[:value].to_i
-    # if value < 0
-    #   # render json: { errors: "negative value" }, status: 422
-    #   json_response({ errors: "negative value" }, 422)
-    # else
-    #   # render json: {"ok"}, status: 200
-    #   json_response(nil, :created)
-    # end
+    ret = ""
+    status = 404
+    value = params[:value].to_s
 
-    obj = {}
-    obj["status"] = "ok"
-
+    # Check for valid integer
+    # Use regex to test
+    if value.match? /\A\d+\z/
+      ret = Fizzbuzzness(value.to_i)
+      status = 200
+    else
+      ret = "Not a valid integer"
+    end
 
     respond_to do |format|
-      # format.html # show.html.erb
-      format.json { render json: obj, status: 200 }
+      format.json { render json: ret, status: status }
     end
   end
+
 end
