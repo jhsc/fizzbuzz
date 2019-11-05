@@ -1,25 +1,17 @@
-# README
+# Requirements
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- Ruby 2.4.0
+- Rails 5.2.2
 
-Things you may want to cover:
+## FizzBuzz
 
-* Ruby version
+```
+POST /fizzbuzz/computate
+```
 
-* System dependencies
+### Request
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
+``` json
+{
+  "value": "15"
+}
