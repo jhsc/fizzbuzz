@@ -3,17 +3,17 @@ class FizzbuzzController < ApplicationController
 
   def computate
     puts "Params == #{params[:value]}"
-    ret = ""
+    ret = {}
     status = 404
     value = params[:value].to_s
 
     # Check for valid integer
     # Use regex to test
     if value.match? /\A\d+\z/
-      ret = Fizzbuzzness(value.to_i)
+      ret["resp"] = Fizzbuzzness(value.to_i)
       status = 200
     else
-      ret = "Not a valid integer"
+      ret["resp"] = "Not a valid integer"
     end
 
     respond_to do |format|
