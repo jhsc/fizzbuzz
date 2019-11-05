@@ -1,0 +1,48 @@
+<h1>List of Numbers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Number</th>
+      <th>Action</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% (1..100).each do |number| %>
+      <tr>
+        <td><%= number %></td>
+        <td> <button id="<%= number %>" type="button" style="padding: 6px">
+            Calculate
+          </button>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script>
+
+  $(document).on('click', 'button', function () {
+    id = this.id;
+    $.ajax({
+      url : "/fizzbuzz/computate",
+      data : {value: id},
+      type : 'POST',
+      dataType : 'json',
+      async: true,
+      success : function(data) {
+        console.log(data);
+        if (data.resp != "") {
+          $("#"+id).html(data.resp);
+        } else {
+          $("#"+id).text("Blank");
+        }
+      },
+      error : function() {
+        console.log('error');
+      }
+  });
+});
+</script>
